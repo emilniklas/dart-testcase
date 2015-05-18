@@ -4,4 +4,4 @@ description: A simple mirror based class wrapper around the test-package
 author: Emil Persson <emil.n.persson@gmail.com>
 homepage: http://github.com/emilniklas/dart-testcase
 dependencies:
-  test: any
+  test: ">=0.12.1 <0.13.0"
