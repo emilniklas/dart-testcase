@@ -1,0 +1,7 @@
+name: testcase
+version: 0.1.0
+description: A simple mirror based class wrapper around the test-package
+author: Emil Persson <emil.n.persson@gmail.com>
+homepage: http://github.com/emilniklas/dart-testcase
+dependencies:
+  test: any
