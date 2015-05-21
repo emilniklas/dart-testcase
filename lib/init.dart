@@ -10,8 +10,7 @@ Iterable<Type> _getAllTestCases() {
 }
 
 Iterable<ClassMirror> _getAllTestCaseMirrors() {
-  return _getAllClasses().toList()
-    ..retainWhere(_classIsTestCase);
+  return _getAllClasses().toList()..retainWhere(_classIsTestCase);
 }
 
 Iterable<ClassMirror> _getAllClasses() {
@@ -31,8 +30,7 @@ ClassMirror _castToClassMirror(d) {
 }
 
 bool _classIsTestCase(ClassMirror classMirror) {
-  return classMirror.isSubtypeOf(reflectType(TestCase))
-  && classMirror.reflectedType != TestCase;
+  return classMirror.isSubtypeOf(reflectType(TestCase)) && classMirror.reflectedType != TestCase;
 }
 
 _instantiateAndRunTestCase(Type testCaseType) {

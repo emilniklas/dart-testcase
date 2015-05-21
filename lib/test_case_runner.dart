@@ -20,18 +20,17 @@ class _TestCaseRunner implements TestCaseRunner {
   }
 
   String _unitName(TestCase testCase) {
-    return testCase.runtimeType.toString().replaceFirst(
-        new RegExp(r'test$', caseSensitive: false), ''
-    );
+    return testCase.runtimeType.toString()
+    .replaceFirst(new RegExp(r'test$', caseSensitive: false), '');
   }
 
   _declareTestGroup() {
     setUp(testCase.setUp);
     tearDown(testCase.tearDown);
-    reflectClass(testCase.runtimeType).declarations.forEach(_registerTests);
+    reflectClass(testCase.runtimeType).declarations.forEach(_registerIfTest);
   }
 
-  _registerTests(Symbol symbol, DeclarationMirror declaration) {
+  _registerIfTest(Symbol symbol, DeclarationMirror declaration) {
     if (_methodIsTest(declaration))
       _registerTest(symbol);
   }
