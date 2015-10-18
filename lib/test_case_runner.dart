@@ -1,6 +1,15 @@
 part of testcase;
 
-const test = 'test';
+class Test {
+  final String testOn;
+  final Timeout timeout;
+  final dynamic skip;
+  final Map<String, dynamic> onPlatform;
+
+  const Test({this.testOn, this.timeout, this.skip, this.onPlatform});
+}
+
+const test = const Test();
 
 abstract class TestCaseRunner {
 
@@ -32,15 +41,26 @@ class _TestCaseRunner implements TestCaseRunner {
 
   _registerIfTest(Symbol symbol, DeclarationMirror declaration) {
     if (_methodIsTest(declaration))
-      _registerTest(symbol);
+      _registerTest(symbol, _getTestMetaData(declaration));
   }
 
   _methodIsTest(DeclarationMirror declaration) {
-    return (declaration.metadata.any((meta) => meta.reflectee == test));
+    return (declaration.metadata.any((meta) => meta.reflectee is Test));
   }
 
-  _registerTest(Symbol symbol) {
-    dart_test.test(_describeTest(symbol), () => _runTest(symbol));
+  Test _getTestMetaData(DeclarationMirror declaration) {
+    return declaration.metadata
+        .firstWhere((m) => m.reflectee is Test)
+        .reflectee;
+  }
+
+  _registerTest(Symbol symbol, Test testAnnotation) {
+    dart_test.test(
+        _describeTest(symbol), () => _runTest(symbol),
+        testOn: testAnnotation.testOn,
+        timeout: testAnnotation.timeout,
+        skip: testAnnotation.skip,
+        onPlatform: testAnnotation.onPlatform);
   }
 
   _runTest(Symbol symbol) {
