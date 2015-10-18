@@ -16,4 +16,9 @@ class GreeterTest implements TestCase {
   it_works() {
     expect(greeter.sayHelloTo('Emil'), equals('Hello, Emil'));
   }
+
+  @Test(skip: 'Oh noes, it fails')
+  it_does_not_work() {
+    expect(greeter.sayHelloTo('Kasper'), equals('Hello, Emil'));
+  }
 }
