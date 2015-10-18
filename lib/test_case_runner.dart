@@ -21,7 +21,7 @@ class _TestCaseRunner implements TestCaseRunner {
 
   String _unitName(TestCase testCase) {
     return testCase.runtimeType.toString()
-    .replaceFirst(new RegExp(r'test$', caseSensitive: false), '');
+        .replaceFirst(new RegExp(r'test$', caseSensitive: false), '');
   }
 
   _declareTestGroup() {
@@ -44,7 +44,9 @@ class _TestCaseRunner implements TestCaseRunner {
   }
 
   _runTest(Symbol symbol) {
-    return reflect(testCase).invoke(symbol, []).reflectee;
+    return reflect(testCase)
+        .invoke(symbol, [])
+        .reflectee;
   }
 
   String _describeTest(Symbol symbol) {
